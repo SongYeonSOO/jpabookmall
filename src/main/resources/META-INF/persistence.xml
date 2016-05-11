@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	version="2.1">
+	<!-- package name을 쓰면되나봐; db이름을 쓰면되나? -->
+	<persistence-unit name="jpabookmall">
+
+		<properties>
+
+			<!-- 필수 속성 -->
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.user" value="jpadb" />
+			<property name="javax.persistence.jdbc.password" value="jpadb" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jpadb" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+
+			<!-- 옵션 -->
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.use_sql_comments" value="true" />
+			<property name="hibernate.id.new_generator_mappings" value="true" />
+
+
+			<!-- ddl을 auto를 가지고 create를하면 table을 다 지우고 새로 만든다 ; 우리는 이미 만들었으니깐 할 필요 x -->
+			<!--create뿐만아니라 update 등도 있다! -->
+<!-- 			<property name="hibernate.hbm2ddl.auto" value="create" /> -->
+	<property name="hibernate.hbm2ddl.auto" value="create" /> 
+		</properties>
+
+	</persistence-unit>
+
+</persistence>
