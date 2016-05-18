@@ -38,6 +38,7 @@ public class App {
 	//	FindListLogic(em);
 	//	FindOneAndDeleteLogic(em);
 		} catch (Exception ex) {
+			ex.printStackTrace();
 			tx.rollback();
 		}
 		// 6. 트랜잭션 커밋
@@ -54,7 +55,7 @@ public class App {
 	//insert logic!
 	public static void insertLogic( EntityManager em ) {
 	    Book book = new Book();
-	    book.setNo( 1L );
+	  // book.setNo( 1L );
 	    book.setTitle( "자바의 신" );
 	    book.setDescription("자바책이당");
 	    book.setPrice( 20000L );

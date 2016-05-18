@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -37,7 +39,11 @@ public class Book {
 	//transient: 영속화 시키지 않겠다!(db에 넣지않겠다!!!!)
 	@Transient
 	private String test;	 
-
+	
+	@ManyToOne // mapping 관계 표현  OneToOne, ManyToOne, OneToMany, ManyToMany
+	@JoinColumn( name = "category_no" )	//table mapping시 관계에 대한 column명을 적어준다
+	private Category category;
+	
 	public String getTest() {
 		return test;
 	}
@@ -78,10 +84,26 @@ public class Book {
 		this.description = description;
 	}
 
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		//이미 들어있는 경우 삭제
+		if(this.category != null){
+			this.category.getBooks().remove(this);
+		}
+		this.category = category;
+		//category안에 들어있는 책 list 마지막에 저장
+		if(category!=null){
+			category.getBooks().add(this);
+		}
+	}
+
 	@Override
 	public String toString() {
 		return "Book [no=" + no + ", title=" + title + ", price=" + price + ", description=" + description + ", test="
-				+ test + "]";
+				+ test + ", category=" + category + "]";
 	}
 
 
